@@ -86,11 +86,11 @@ SOFTWARE.
 #define USE_DIVERSITY_FAST_SWITCHING
 
 //#define USE_IR_EMITTER
-//#define USE_SERIAL_OUT // Not compatible with IR emitter.
+#define USE_SERIAL_OUT // Not compatible with IR emitter.
 
 // You can use any of the arduino analog pins to measure the voltage of the
 // battery. See additional configuration below.
-//#define USE_VOLTAGE_MONITORING
+#define USE_VOLTAGE_MONITORING
 
 // Choose if you wish to use 8 additional channels:
 //     5362 MHz
