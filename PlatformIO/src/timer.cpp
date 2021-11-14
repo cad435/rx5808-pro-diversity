@@ -9,18 +9,33 @@ Timer::Timer(uint16_t delay) {
 }
 
 const bool Timer::hasTicked() {
+    bool hasTicked = false;
     if (this->ticked)
-        return true;
+        hasTicked = true;
 
-    if (millis() >= this->nextTick) {
+    else if (millis() >= this->nextTick) {
         this->ticked = true;
-        return true;
+        hasTicked = true;
     }
-
+    
+    
+    if (isStarted)
+    {
+        return hasTicked;
+    }
     return false;
 }
 
 void Timer::reset() {
     this->nextTick = millis() + this->delay;
     this->ticked = false;
+}
+
+void Timer::start()
+{
+    isStarted = true;
+}
+void Timer::stop()
+{
+    isStarted = false;
 }

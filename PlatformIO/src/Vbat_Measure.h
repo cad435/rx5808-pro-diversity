@@ -8,20 +8,15 @@
 
 namespace Vbat_Measure {
     
-    float BatteryVoltage = 3.3; //V
-    void update()
-    {
-        BatteryVoltage = analogRead(PIN_VBAT);
-        //scale ADC reading roughly to a voltage
-        BatteryVoltage = BatteryVoltage / VBAT_DIVISOR;
-    }
-    float getBatteryVoltage()
-    {
-        return BatteryVoltage;
-    }
+    extern float BatteryVoltage;
+
+    
+
+    void update();
+    float getBatteryVoltage();
 
 
 
-
+}
 
 #endif

@@ -171,7 +171,7 @@ SOFTWARE.
     //    BAT- ----====----|----|
 
     // Voltage levels
-    #define WARNING_VOLTAGE 108 // 3.6V per cell for 3S //not used
+    #define WARNING_VOLTAGE 3.2 //V, used
     #define CRITICAL_VOLTAGE 100 // 3.3V per cell for 3S //not used
     #define VBAT_SCALE 119 //not Used
     #define VBAT_OFFSET 0 //Not Used

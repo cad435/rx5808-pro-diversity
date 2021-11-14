@@ -7,6 +7,7 @@
 #include "buttons.h"
 #include "state.h"
 #include "../ui/ui.h"
+#include"../Vbat_Measure.h"
 
 
 
@@ -140,9 +141,7 @@ void StateMachine::ScreensaverStateHandler::onInitialDraw() {
 
         Ui::display.setTextSize(4);
         Ui::display.setCursor( 5, 25);
-        Voltage = analogRead(PIN_VBAT);
-        //scale ADC reading roughly to a voltage
-        Voltage = Voltage / VBAT_DIVISOR;
+        Voltage = Vbat_Measure::getBatteryVoltage();
 
         Ui::display.print(Voltage);
         Ui::display.print("V");

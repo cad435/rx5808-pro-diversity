@@ -42,6 +42,7 @@ SOFTWARE.
 #include "receiver/receiver_spi.h"
 #include "buttons.h"
 #include "states/state.h"
+#include "Vbat_Measure.h"
 
 #include "ui/ui.h"
 
@@ -133,6 +134,7 @@ void loop() {
     Buttons::update();
     StateMachine::update();
     Ui::update();
+    Vbat_Measure::update();
     EepromSettings.update();
 
     if (
