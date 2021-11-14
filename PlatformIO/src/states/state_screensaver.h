@@ -12,6 +12,15 @@ namespace StateMachine {
         private:
             Timer displaySwapTimer = Timer(SCREENSAVER_DISPLAY_CYCLE * 1000);
             bool showLogo = false;
+            uint8_t DrawState = 0;
+            /*
+                DrawState:
+                    0: Logo
+                    1: Channel & MHz
+                    2: Battery Voltage
+            */
+            
+            float Voltage = 0; //used to determine Battery-Voltage
 
         public:
             void onEnter();

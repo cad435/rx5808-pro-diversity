@@ -36,6 +36,7 @@ SOFTWARE.
 // =============================================================================
 
 // SSH1106 needs https://github.com/badzz/Adafruit_SH1106 installed.
+//SH1106 and TV-Out not tested...
 //#define SH1106
 
 //#define TVOUT_SCREENS
@@ -86,7 +87,7 @@ SOFTWARE.
 #define USE_DIVERSITY_FAST_SWITCHING
 
 //#define USE_IR_EMITTER
-#define USE_SERIAL_OUT // Not compatible with IR emitter.
+//#define USE_SERIAL_OUT // Not compatible with IR emitter. //For whatever reason, this breaks the OLED display...
 
 // You can use any of the arduino analog pins to measure the voltage of the
 // battery. See additional configuration below.
@@ -170,12 +171,13 @@ SOFTWARE.
     //    BAT- ----====----|----|
 
     // Voltage levels
-    #define WARNING_VOLTAGE 108 // 3.6V per cell for 3S
-    #define CRITICAL_VOLTAGE 100 // 3.3V per cell for 3S
-    #define VBAT_SCALE 119
-    #define VBAT_OFFSET 0
+    #define WARNING_VOLTAGE 108 // 3.6V per cell for 3S //not used
+    #define CRITICAL_VOLTAGE 100 // 3.3V per cell for 3S //not used
+    #define VBAT_SCALE 119 //not Used
+    #define VBAT_OFFSET 0 //Not Used
+    #define VBAT_DIVISOR 205 //Raw ADC-Reading will divided by this value to give a Voltage
 
-    // Alarm sounds
+    // Alarm sounds //not used
     #define ALARM_EVERY_MSEC 5000
     #define CRITICAL_BEEP_EVERY_MSEC 400
     #define CRITICAL_BEEPS 3

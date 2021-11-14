@@ -9,6 +9,7 @@
 #include "../ui/ui.h"
 
 
+
 static const unsigned char PROGMEM logo[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -78,13 +79,23 @@ static const unsigned char PROGMEM logo[] = {
 
 
 void StateMachine::ScreensaverStateHandler::onEnter() {
-    showLogo = true;
+    //showLogo = true;
+     DrawState = 0;
 }
 
 void StateMachine::ScreensaverStateHandler::onUpdate() {
     if (this->displaySwapTimer.hasTicked()) {
         this->displaySwapTimer.reset();
-        showLogo = !showLogo;
+        //showLogo = !showLogo;
+
+        //roll through the states
+
+        DrawState++;
+        if (DrawState > 2)
+        {
+            DrawState = 0;
+        }
+        
 
         Ui::needUpdate();
     }
@@ -102,16 +113,9 @@ void StateMachine::ScreensaverStateHandler::onButtonChange(
 void StateMachine::ScreensaverStateHandler::onInitialDraw() {
     Ui::clear();
 
-    if (showLogo) {
-        Ui::display.drawBitmap(
-            0,
-            0,
-            logo,
-            SCREEN_WIDTH,
-            SCREEN_HEIGHT,
-            WHITE
-        );
-    } else {
+    switch (DrawState)
+    {
+    case 1: //Channel & MHz
         Ui::display.setTextColor(WHITE);
 
         Ui::display.setTextSize(6);
@@ -126,8 +130,35 @@ void StateMachine::ScreensaverStateHandler::onInitialDraw() {
             SCREEN_WIDTH_MID - ((CHAR_WIDTH + 1) * 2) / 2 * 4 - 1,
             SCREEN_HEIGHT - CHAR_HEIGHT * 2 - 2);
         Ui::display.print(Channels::getFrequency(Receiver::activeChannel));
-    }
+        break;
 
+    case 2: //Battery Voltage
+        Ui::display.setTextSize(2);
+        Ui::display.setCursor(10, 1);
+        Ui::display.println("V Bat:");
+
+
+        Ui::display.setTextSize(4);
+        Ui::display.setCursor( 5, 25);
+        Voltage = analogRead(PIN_VBAT);
+        //scale ADC reading roughly to a voltage
+        Voltage = Voltage / VBAT_DIVISOR;
+
+        Ui::display.print(Voltage);
+        Ui::display.print("V");
+        break;
+    
+    default: //case 0 = logo
+        Ui::display.drawBitmap(
+                0,
+                0,
+                logo,
+                SCREEN_WIDTH,
+                SCREEN_HEIGHT,
+                WHITE
+            );
+        break;
+    }
     Ui::needDisplay();
 }
 

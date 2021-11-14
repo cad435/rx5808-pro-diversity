@@ -64,7 +64,7 @@ void setup()
 
     // Enable buzzer and LED for duration of setup process.
     digitalWrite(PIN_LED, HIGH);
-    digitalWrite(PIN_BUZZER, LOW);
+    digitalWrite(PIN_BUZZER, HIGH);
 
     setupSettings();
 
@@ -83,7 +83,7 @@ void setup()
 
     // Setup complete.
     digitalWrite(PIN_LED, LOW);
-    digitalWrite(PIN_BUZZER, HIGH);
+    digitalWrite(PIN_BUZZER, LOW);
 
     Buttons::registerChangeFunc(globalMenuButtonHandler);
 
@@ -116,6 +116,10 @@ void setupPins() {
     digitalWrite(PIN_SPI_SLAVE_SELECT, HIGH);
     digitalWrite(PIN_SPI_CLOCK, LOW);
     digitalWrite(PIN_SPI_DATA, LOW);
+
+    #ifdef USE_VOLTAGE_MONITORING
+        pinMode(PIN_VBAT, INPUT);
+    #endif
 }
 
 void setupSettings() {
