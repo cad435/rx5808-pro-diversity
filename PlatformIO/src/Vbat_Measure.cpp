@@ -24,7 +24,7 @@ namespace Vbat_Measure {
             {
                 digitalWrite(PIN_BUZZER, beep);
                 beep = !beep;
-                Beep_Timer.reset();//reset the timer, so it can beep.
+                Beep_Timer.reset();//reset the timer, so it can tick again.
             }
 
         }
@@ -32,7 +32,7 @@ namespace Vbat_Measure {
         else if (Beep_Timer.hasTicked())
         {
             digitalWrite(PIN_BUZZER, LOW);
-            Beep_Timer.stop();//stop the timer to preven any overflow-beeps
+            Beep_Timer.stop();//stop the timer to prevent any overflow-beeps
         }      
 
     }
